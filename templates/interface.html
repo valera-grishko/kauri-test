@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Prices</title>
+</head>
+<body>
+    <span id="price"></span>
+    <script>
+        var pair = "{{ pair }}";
+        var exchange = "{{ exchange }}";
+        var baseUrl = "ws://localhost:8000/ws";
+        var wsUrl = pair ? baseUrl + "?pair=" + pair : baseUrl;
+        wsUrl = exchange ? wsUrl + "&exchange=" + exchange : wsUrl;
+
+        var ws = new WebSocket(wsUrl);
+        ws.onmessage = function(event) {
+            document.getElementById("price").textContent = event.data;
+        };
+    </script>
+</body>
+</html>
